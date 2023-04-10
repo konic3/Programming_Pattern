@@ -1,0 +1,16 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+int main()
+{
+	int i=0;
+	int a;
+	while(1){
+		cout<<"*";
+
+		if(kbhit()){
+			if(getch()==27){break;}
+		}
+	}
+	return 0;
+}
