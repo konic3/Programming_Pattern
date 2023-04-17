@@ -26,14 +26,14 @@ int print_title_screen()
     return 0;
 }
 
-/*
+
 void gotoxy(int x, int y) {
     //x, y 좌표 설정
     COORD pos = { x,y };
     //커서 이동
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
-*/
+
 
 //game_state == 1 일때 화면
 int print_game_screen(int stage_width, int stage_height)
