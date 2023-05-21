@@ -2,6 +2,8 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+#include <vector>
+#include<string>
 
 #define ANSI_COLOR_RED      "\x1b[31m"
 #define ANSI_COLOR_GREEN    "\x1b[32m"
@@ -18,13 +20,13 @@
 
 namespace MuSoeun
 {
+	//커서 이동
 	void gotoxy(int x, int y) {
 		//x, y 좌표 설정
 		COORD pos = { x,y };
 		//커서 이동
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 	}
-
 	void SetCursorState(bool visible)
 	{
 		CONSOLE_CURSOR_INFO consoleCursorInfo;
@@ -32,6 +34,7 @@ namespace MuSoeun
 		consoleCursorInfo.dwSize = 1;
 		SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursorInfo);
 	}
+
 
 
 	class MGameLoop
@@ -43,6 +46,8 @@ namespace MuSoeun
 		bool isGameRunning = false;
 		bool isEsc = false;
 		bool isOut = false;
+
+		//초기화
 		void Initialize()
 		{
 			SetCursorState(false);
@@ -51,11 +56,15 @@ namespace MuSoeun
 			std::cout << ANSI_COLOR_RESET"게임 초기화중" << std::endl;
 			isGameRunning = true;
 		}
+
+		//해제
 		void Release()
 		{
 			gotoxy(3, 18);
 			std::cout << ANSI_COLOR_RESET"게임 종료중" << std::endl;
 		}
+
+		//입력 대기
 		void Update()
 		{
 			gotoxy(3, 16);
@@ -65,6 +74,8 @@ namespace MuSoeun
 				KeyEvent(_getch());
 			}
 		}
+
+		//화면 그리기
 		void Render()
 		{
 			gotoxy(3, 17);
@@ -72,7 +83,7 @@ namespace MuSoeun
 		}
 
 
-
+		//게임 진행
 		void Run()
 		{
 			Initialize();
@@ -84,13 +95,13 @@ namespace MuSoeun
 			Release();
 		}
 
+
+
+		//ESC입력
 		void KeyEvent(char KeyInput)
 		{
 			switch (KeyInput)
 			{
-				/* 한번 ESC누르면 일시 정지가 되고
-				 * 여기서 나가기를 선택하면 나가진다			 *
-				 */
 			case KEY_ESC:
 				isEsc = true;
 				gotoxy(5, 5);
