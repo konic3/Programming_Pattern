@@ -6,8 +6,8 @@ namespace MuSoeun
     class Scene
     {
     public:
-        int width = 30;
-        int height = 10;
+        int width;
+        int height;
         vector<string> objList;
         //vector<bool> objListcheck;
 
@@ -28,11 +28,13 @@ namespace MuSoeun
         void InitScreenBuf()
         {
             screenBuf = new char[(width + 5) * (height + 2)];
-            //스테이지
+            //스테이지 구현 실험
+          
             for (size_t i = 0; i < (width + 5) * (height + 2); i++)
             {
                 screenBuf[i] = '*';
             }
+           
 
             //스테이지 비우기
             
@@ -72,6 +74,7 @@ namespace MuSoeun
             }
         }
         
+        //오브젝트 그리기
         void Draw() {
             gotoxy(5, 4);
             cout << "***";
@@ -87,8 +90,8 @@ namespace MuSoeun
         void DrawScreenBuf()
         {
             std::cout << screenBuf;
-           
 
+          
         }
     };
 
@@ -114,6 +117,11 @@ int main()
     MuSoeun::Scene scene;
     MuSoeun::Object object;
     
+    cout << "가로를 입력하세요" << endl;
+    cin >> scene.width;
+    cout << "세로를 입력하세요" << endl;
+    cin >> scene.height;
+    system("cls");
 
     scene.InitScreenBuf();
     scene.DrawScreenBuf();
@@ -121,12 +129,12 @@ int main()
     scene.objList.push_back("Sqaure");
     scene.Draw();
 
-    /*
+    
     while (1)
     {
 
     }
-    */
+    
     
     
     scene.ReleaseScreenBuf();
