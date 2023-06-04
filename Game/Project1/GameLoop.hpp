@@ -168,8 +168,8 @@ namespace Running {
 				break;
 			case 1:
 				system("cls");
-				cout << "게임 모드를 입력해주세요." << endl;
-				cout << "1. 일반 모드	2.벽X모드" << endl;
+				cout << "\n게임 모드를 입력해주세요.(기본은 일반모드)" << endl;
+				cout << "\n1.일반 모드    2.벽X모드" << endl;
 				Vercheck = _getch();		
 				print_game_screen(stage_width, stage_height);
 				GameState = 5;
@@ -231,11 +231,11 @@ namespace Running {
 				}
 				break;
 			case 5:
-				if (Vercheck == '1') {
-					maingame(stage_width, stage_height,true);
-				}
-				else if(Vercheck=='2') {
+				if(Vercheck=='2') {
 					maingame(stage_width, stage_height,false);
+				}
+				else {
+					maingame(stage_width, stage_height, true);
 				}
 				system("cls");
 				break;
@@ -245,7 +245,7 @@ namespace Running {
 		}
 
 		int maingame(int stage_width,int stage_height,bool isOriginal) {
-			char game_key = 'd';
+			char game_key = '0';
 			bool isC = true;
 			int x = 20;
 			int y = 10;
@@ -283,7 +283,7 @@ namespace Running {
 			{
 				
 
-
+			
 				//제거&이동
 				switch (game_key)
 				{
@@ -351,14 +351,15 @@ namespace Running {
 					arr[0].x += 1;
 					break;
 				case 27:
-					GameState = 0;
 					system("cls");
+					GameState = 0;
 					break;
 				default:
 					break;
 				}
-
 				
+
+
 
 				//이동
 				for (size_t i = 0; i < len + 1; i++)
@@ -370,8 +371,14 @@ namespace Running {
 				//시작 정지
 				if (start_pause == true)
 				{
-					game_key = _getch();
-					start_pause = false;
+					check_key = _getch();
+					if (check_key != 'a') {
+						game_key = 'd';
+						start_pause = false;
+					}
+					else {
+						
+					}
 				}
 
 				//게임오버(자기 몸)
@@ -408,6 +415,7 @@ namespace Running {
 				}
 
 
+
 				//게임 테두리 계속 찍기
 				gotoxy(0, 0);
 				std::cout << "┌";
@@ -439,6 +447,9 @@ namespace Running {
 					isC = true;
 					check_key = _getch();
 					if (check_key != 'w' && check_key != 'a' && check_key != 's' && check_key != 'd') {
+						if (check_key == 27) {
+							game_key = check_key;
+						}
 					}
 					else if (game_key == 'd' && check_key != 'a')
 					{
