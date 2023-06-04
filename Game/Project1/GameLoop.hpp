@@ -42,7 +42,7 @@ namespace Running {
 		int stage_width=50;
 		int stage_height=20;
 		char key_input = '0';
-		
+		char Vercheck='1';
 		
 		//게임 변수
 		
@@ -167,6 +167,10 @@ namespace Running {
 				}
 				break;
 			case 1:
+				system("cls");
+				cout << "게임 모드를 입력해주세요." << endl;
+				cout << "1. 일반 모드	2.벽X모드" << endl;
+				Vercheck = _getch();		
 				print_game_screen(stage_width, stage_height);
 				GameState = 5;
 				
@@ -227,7 +231,12 @@ namespace Running {
 				}
 				break;
 			case 5:
-				maingame(stage_width, stage_height);
+				if (Vercheck == '1') {
+					maingame(stage_width, stage_height,true);
+				}
+				else if(Vercheck=='2') {
+					maingame(stage_width, stage_height,false);
+				}
 				system("cls");
 				break;
 			default:
@@ -235,7 +244,7 @@ namespace Running {
 			}
 		}
 
-		int maingame(int stage_width,int stage_height) {
+		int maingame(int stage_width,int stage_height,bool isOriginal) {
 			char game_key = 'd';
 			bool isC = true;
 			int x = 20;
@@ -246,7 +255,7 @@ namespace Running {
 			int ItemX;
 			int ItemY;
 			bool trigger = false;
-			struct WormBody arr[50];
+			struct WormBody arr[100];
 			bool start_pause = true;
 			char check_key;
 
@@ -272,7 +281,9 @@ namespace Running {
 			cout << "ESC를 눌러 메인메뉴로 나가기.";
 			while (GameState<6&&GameState>1)
 			{
-			
+				
+
+
 				//제거&이동
 				switch (game_key)
 				{
@@ -347,6 +358,8 @@ namespace Running {
 					break;
 				}
 
+				
+
 				//이동
 				for (size_t i = 0; i < len + 1; i++)
 				{
@@ -361,15 +374,31 @@ namespace Running {
 					start_pause = false;
 				}
 
-				//게임오버(스테이지)
-				if (arr[0].x == 0 || arr[0].y == 0||arr[0].x==stage_width+1||arr[0].y==stage_height+1) {
-					trigger = true;
-				}
 				//게임오버(자기 몸)
 				for (size_t i = 1; i < len + 1; i++)
 				{
 					if (arr[0].x == arr[i].x && arr[0].y == arr[i].y) {
 						trigger = true;
+					}
+				}
+
+				//게임오버(스테이지)
+				if (isOriginal == true) {
+					if (arr[0].x == 0 || arr[0].y == 0 || arr[0].x == stage_width + 1 || arr[0].y == stage_height + 1) {
+						trigger = true;
+					}
+				}else if(isOriginal==false){
+					if (arr[0].x == 0){
+						arr[0].x = stage_width+1;
+					}
+					else if (arr[0].y == 0) {
+						arr[0].y = stage_height+1;
+					}
+					else if (arr[0].x == stage_width+1) {
+						arr[0].x = 0;
+					}
+					else if (arr[0].y == stage_height+1) {
+						arr[0].y = 0;
 					}
 				}
 				if (trigger == true) {
@@ -378,17 +407,42 @@ namespace Running {
 					break;
 				}
 
+
+				//게임 테두리 계속 찍기
+				gotoxy(0, 0);
+				std::cout << "┌";
+				for (int j = 0; j < stage_width; j++)
+				{
+					std::cout << "─";
+				}
+				std::cout << "┐";
+				std::cout << std::endl;
+				for (size_t i = 1; i < stage_height + 1; i++)
+				{
+					gotoxy(0, i);
+					cout << "│";
+					gotoxy(stage_width + 1, i);
+					cout << "│";
+				}
+				gotoxy(0, stage_height + 1);
+				cout << "└";
+				for (int f = 0; f < stage_width; f++)
+				{
+					printf("─");
+				}
+				std::cout << "┘";
+				std::cout << std::endl;
+
 				//방향 입력
 				if (_kbhit())
 				{
 					isC = true;
 					check_key = _getch();
-					if (game_key == 'd' && check_key != 'a')
+					if (check_key != 'w' && check_key != 'a' && check_key != 's' && check_key != 'd') {
+					}
+					else if (game_key == 'd' && check_key != 'a')
 					{
 						game_key = check_key;
-					}
-					else if (check_key != 'w' && check_key != 'a' && check_key != 's' && check_key != 'd') {
-						check_key = game_key;
 					}
 					else if (game_key == 'a' && check_key != 'd') {
 						game_key = check_key;

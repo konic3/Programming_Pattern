@@ -66,4 +66,3 @@ int print_introduction_screen()
 	return 0;
 }
 
-
