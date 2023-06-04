@@ -387,6 +387,9 @@ namespace Running {
 					{
 						game_key = check_key;
 					}
+					else if (check_key != 'w' && check_key != 'a' && check_key != 's' && check_key != 'd') {
+						check_key = game_key;
+					}
 					else if (game_key == 'a' && check_key != 'd') {
 						game_key = check_key;
 					}
@@ -396,6 +399,7 @@ namespace Running {
 					else if (game_key == 's' && check_key != 'w') {
 						game_key = check_key;
 					}
+					
 				}
 
 				//아이템 생성
