@@ -127,6 +127,7 @@ namespace Running {
 				cout << "	최고점수 : " << highscore;
 				gotoxy(0, 10);
 				cout << "아무키를 눌러 메인메뉴로 돌아가기.";
+				Sleep(500);
 				_getch();
 				score = 0;
 				GameState = 0;
@@ -265,7 +266,10 @@ namespace Running {
 			gotoxy(ItemX,ItemY);
 			printf("@");
 
-
+			gotoxy(60, 10);
+			cout << "score : " << score;
+			gotoxy(60, 11);
+			cout << "ESC를 눌러 메인메뉴로 나가기.";
 			while (GameState<6&&GameState>1)
 			{
 			
@@ -397,6 +401,8 @@ namespace Running {
 				//아이템 생성
 				if (arr[0].x == ItemX && arr[0].y == ItemY) {
 					score++;
+					gotoxy(60, 10);
+					cout << "score : " << score;
 					len++;
 					arr[len].x = arr[len - 1].x;
 					arr[len].y = arr[len - 1].y;
