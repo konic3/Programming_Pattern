@@ -6,17 +6,18 @@
 //GameState==0일때
 void print_title_screen()
 {
-	std::cout << "******************************************" << std::endl;
-	std::cout << "*                                        *" << std::endl;
-	std::cout << "*                                        *" << std::endl;
-	std::cout << "*              지렁이 게임               *" << std::endl;
-	std::cout << "*             (Snake  Bite)              *" << std::endl;
-	std::cout << "*                                        *" << std::endl;
-	std::cout << "*   1. 게임 시작                         *" << std::endl;
-	std::cout << "*   2. 게임 설명                         *" << std::endl;
-	std::cout << "*   3. 게임 종료                         *" << std::endl;
-	std::cout << "*                                        *" << std::endl;
-	std::cout << "******************************************" << std::endl;
+	std::cout << "┌───────────────────────────────────────┐" << std::endl;
+	std::cout << "│                                       │" << std::endl;
+	std::cout << "│                                       │" << std::endl;
+	std::cout << "│              지렁이 게임              │" << std::endl;
+	std::cout << "│             (Snake  Bite)             │" << std::endl;
+	std::cout << "│                                       │" << std::endl;
+	std::cout << "│   1. 게임 시작                        │" << std::endl;
+	std::cout << "│   2. 게임 설명                        │" << std::endl;
+	std::cout << "│   3. 게임 종료                        │" << std::endl;
+	std::cout << "│                                       │" << std::endl;
+	std::cout << "└───────────────────────────────────────┘" << std::endl;
+
 
 }
 
