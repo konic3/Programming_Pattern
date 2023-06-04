@@ -66,7 +66,7 @@ namespace Running {
 			SetConsoleCursorInfo(hConsole, &ConsoleCursor);
 		}
 
-
+		//메인메뉴 
 		void KeyEvent(char KeyInput)
 		{
 			system("cls");
@@ -109,8 +109,6 @@ namespace Running {
 				break;
 			}
 		}
-
-
 		void Update() {
 			if (GameState < 6)
 			{
@@ -134,7 +132,7 @@ namespace Running {
 			}
 		}
 
-
+		//게임 싸이클
 		void Run() {
 			while (isGameRunning == true)
 			{
