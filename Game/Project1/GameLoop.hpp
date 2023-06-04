@@ -137,9 +137,7 @@ namespace Running {
 		void Run() {
 			while (isGameRunning == true)
 			{
-
 				Update();
-
 			}
 		}
 
@@ -226,12 +224,10 @@ namespace Running {
 					break;
 
 				}
-				//KeyEvent(_getch());
 				break;
 			case 5:
-				//gotoxy(1, 1);
-
 				maingame(stage_width, stage_height);
+				system("cls");
 				break;
 			default:
 				break;
@@ -242,7 +238,7 @@ namespace Running {
 			char game_key = 'd';
 			bool isC = true;
 			int x = 20;
-			int y = 5;
+			int y = 10;
 			int len = 2;
 			int lastX;
 			int lastY;
@@ -250,6 +246,8 @@ namespace Running {
 			int ItemY;
 			bool trigger = false;
 			struct WormBody arr[50];
+			bool start_pause = true;
+			char check_key;
 
 			//처음 지렁이 초기화
 			for (int i = 0; i < 3; i++)
@@ -268,9 +266,10 @@ namespace Running {
 			printf("@");
 
 
-			while (1)
+			while (GameState<6&&GameState>1)
 			{
-				//제거
+			
+				//제거&이동
 				switch (game_key)
 				{
 				case 'w':
@@ -336,7 +335,10 @@ namespace Running {
 					}
 					arr[0].x += 1;
 					break;
-
+				case 27:
+					GameState = 0;
+					system("cls");
+					break;
 				default:
 					break;
 				}
@@ -348,6 +350,12 @@ namespace Running {
 					cout << arr[i].body;
 				}
 
+				//시작 정지
+				if (start_pause == true)
+				{
+					game_key = _getch();
+					start_pause = false;
+				}
 
 				//게임오버(스테이지)
 				if (arr[0].x == 0 || arr[0].y == 0||arr[0].x==stage_width+1||arr[0].y==stage_height+1) {
@@ -370,7 +378,20 @@ namespace Running {
 				if (_kbhit())
 				{
 					isC = true;
-					game_key = _getch();
+					check_key = _getch();
+					if (game_key == 'd' && check_key != 'a')
+					{
+						game_key = check_key;
+					}
+					else if (game_key == 'a' && check_key != 'd') {
+						game_key = check_key;
+					}
+					else if (game_key == 'w' && check_key != 's') {
+						game_key = check_key;
+					}
+					else if (game_key == 's' && check_key != 'w') {
+						game_key = check_key;
+					}
 				}
 
 				//아이템 생성
@@ -389,6 +410,7 @@ namespace Running {
 				Sleep(150);
 			}
 
+			system("cls");
 			return 0;
 		};
 

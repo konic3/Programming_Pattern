@@ -14,7 +14,7 @@ void print_title_screen()
 	std::cout << "*                                        *" << std::endl;
 	std::cout << "*   1. 게임 시작                         *" << std::endl;
 	std::cout << "*   2. 게임 설명                         *" << std::endl;
-	std::cout << "*   3. 게임 종료 (esc)                   *" << std::endl;
+	std::cout << "*   3. 게임 종료                         *" << std::endl;
 	std::cout << "*                                        *" << std::endl;
 	std::cout << "******************************************" << std::endl;
 
