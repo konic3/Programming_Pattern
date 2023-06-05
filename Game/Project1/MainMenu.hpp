@@ -63,7 +63,7 @@ int print_introduction_screen()
 {
 	//std::cout << "\n******************************************" << std::endl;
 	std::cout << "\n\n지렁이 게임은 플레이어가 지렁이를 조종하여\n먹이를 먹고 덩치를 키워 점수를 얻는 방식의\n게임입니다." << std::endl;
-	std::cout << "타이틀화면으로 돌아갈까요? (Y/N)\n" << std::endl;
+	std::cout << "\n타이틀화면으로 돌아갈까요? (Y/N)\n" << std::endl;
 	return 0;
 }
 
