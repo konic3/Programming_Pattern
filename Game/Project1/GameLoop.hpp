@@ -256,7 +256,8 @@ namespace Running {
 			struct WormBody arr[100];
 			bool start_pause = true;
 			char check_key;
-			bool isSpawn=false;
+			bool isSpawn = false;
+			bool Spawncheck=false;
 
 			//처음 지렁이 초기화
 			for (int i = 0; i < 3; i++)
@@ -475,17 +476,24 @@ namespace Running {
 					arr[len].x = arr[len - 1].x;
 					arr[len].y = arr[len - 1].y;
 					arr[len].body = 'o';
-					isSpawn = false;
+					Spawncheck = false;
 					
-					while (isSpawn==false)
+					while (Spawncheck==false)
 					{
 						ItemX = (rand() % stage_width) + 1;
 						ItemY = (rand() % stage_height) + 1;
-						for (size_t i = 0; i < len; i++)
+						for (int i = 0; i < len; i++)
 						{
-							if (ItemX != arr[i].x && ItemY != arr[i].y) {
+							if (ItemX == arr[i].x && ItemY == arr[i].y) {
+								isSpawn = false;
+								break;
+							}
+							else {
 								isSpawn = true;
 							}
+						}
+						if (isSpawn == true) {
+							Spawncheck = true;
 						}
 					}
 
