@@ -269,7 +269,7 @@ namespace Running {
 			}
 			arr[0].body = '0';
 
-
+			//처음 아이템 생성
 			ItemX = (rand() % stage_width) + 1;
 			ItemY = (rand() % stage_height) + 1;
 			gotoxy(ItemX,ItemY);
@@ -279,16 +279,13 @@ namespace Running {
 			cout << "score : " << score;
 			gotoxy(60, 11);
 			cout << "ESC를 눌러 메인메뉴로 나가기.";
-			while (GameState<6&&GameState>1)
-			{
-				
 
-			
+			while (GameState<6&&GameState>1)
+			{	
 				//제거&이동
 				switch (game_key)
 				{
 				case 'w':
-
 					//뒤에 제거
 					lastX = arr[len].x;
 					lastY = arr[len].y;
@@ -357,9 +354,6 @@ namespace Running {
 				default:
 					break;
 				}
-				
-
-
 
 				//이동
 				for (size_t i = 0; i < len + 1; i++)
@@ -408,13 +402,13 @@ namespace Running {
 						arr[0].y = 0;
 					}
 				}
+			
+				//게임오버
 				if (trigger == true) {
 					system("cls");
 					GameState = 7;
 					break;
 				}
-
-
 
 				//게임 테두리 계속 찍기
 				gotoxy(0, 0);
