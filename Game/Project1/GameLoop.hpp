@@ -44,7 +44,6 @@ namespace Running {
 		char key_input = '0';
 		char Vercheck='1';
 		
-		//게임 변수
 		
 
 		
@@ -243,6 +242,7 @@ namespace Running {
 		}
 
 		int maingame(int stage_width,int stage_height,bool isOriginal) {
+			//게임 변수
 			char game_key = '0';
 			bool isC = true;
 			int x = 20;
@@ -253,7 +253,7 @@ namespace Running {
 			int ItemX;
 			int ItemY;
 			bool trigger = false;
-			struct WormBody arr[100];
+			struct WormBody arr[1000];
 			bool start_pause = true;
 			char check_key;
 			bool isSpawn = false;
