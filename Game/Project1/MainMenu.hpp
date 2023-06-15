@@ -1,5 +1,4 @@
-
-
+#include "Util.hpp"
 
 
 //메인화면 
@@ -66,4 +65,47 @@ int print_introduction_screen()
 	std::cout << "\n타이틀화면으로 돌아갈까요? (Y/N)\n" << std::endl;
 	return 0;
 }
+
+// GameState == 3 일때 화면
+void ExitMenu(bool *isEsc,bool *isOut,bool *isGameRunning,int *GameState) {
+	char key_input = '0';
+
+	if (*isEsc == false)
+	{
+		system("cls");
+		gotoxy(5, 5);
+		std::cout << "종료하시겠습니까?\n\n" "     [ 예 ]   [아니오]" << std::endl;
+		*isEsc = true;
+	}
+	key_input = _getch();
+	switch (key_input)
+	{
+	case KEY_LEFT:
+		if (*isEsc == true) {
+			*isOut = true;
+			gotoxy(5, 5);
+			std::cout << "종료하시겠습니까?\n\n" ANSI_COLOR_YELLOW"     [ 예 ]   " ANSI_COLOR_RESET"[아니오]" << std::endl;
+		}
+		break;
+	case KEY_RIGHT:
+		if (*isEsc == true)
+		{
+			*isOut = false;
+			gotoxy(5, 5);
+			std::cout << "종료하시겠습니까?\n\n" ANSI_COLOR_RESET"     [ 예 ]   " ANSI_COLOR_YELLOW"[아니오]" ANSI_COLOR_RESET"" << std::endl;
+		}
+		break;
+	case KEY_ENTER:
+		if (*isOut == true) { *isGameRunning = false; }
+		else {
+
+			system("cls"); *isEsc = false; *GameState = 0;
+		}
+		break;
+	default:
+		*isGameRunning = true;
+		break;
+	}
+}
+
 
