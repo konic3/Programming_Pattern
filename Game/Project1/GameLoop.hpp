@@ -1,15 +1,7 @@
 #pragma once 
-
 #include "MainMenu.hpp"
 //#include "Util.hpp"
 #include "MainGame.hpp"
-
-
-
-
-int score = 0;
-int highscore = 0;
-
 
 namespace Running {
 
@@ -23,7 +15,8 @@ namespace Running {
 		int stage_height=20;
 		char key_input = '0';
 		char Vercheck='1';
-
+		int score = 0;
+		int highscore = 0;
 		//∞‘¿” ΩŒ¿Ã≈¨
 		void Run() {
 			while (isGameRunning == true)
