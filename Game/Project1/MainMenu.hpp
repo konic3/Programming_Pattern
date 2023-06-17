@@ -8,7 +8,7 @@ void print_title_screen()
 	cout << "忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖" << endl;
 	cout << "弛                                       弛" << endl;
 	cout << "弛                                       弛" << endl;
-	cout << "弛              雖毽檜 啪歜              弛" << endl;
+	cout << "弛               諾翎ぎ檜                弛" << endl;
 	cout << "弛             (Snake  Bite)             弛" << endl;
 	cout << "弛                                       弛" << endl;
 	cout << "弛	      1. 啪歜 衛濛              弛" << endl;
