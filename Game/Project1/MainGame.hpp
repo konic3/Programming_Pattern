@@ -109,7 +109,7 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 	ItemY = (rand() % stage_height) + 1;
 	gotoxy(ItemX, ItemY);
 	cout << ANSI_COLOR_RED"@" ANSI_COLOR_WHITE" ";
-	gotoxy(60, 23);
+	
 	//UI
 	gotoxy(60, 10);
 	cout << "score : " << *score;
