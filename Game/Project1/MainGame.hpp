@@ -2,37 +2,85 @@
 
 using namespace std;
 
+//테두리 그리기
+void drawborder(int stage_width, int stage_height) {
+	
+	gotoxy(0, 0);
+	std::cout << "┌";
+	for (int j = 0; j < stage_width; j++)
+	{
+		std::cout << "─";
+	}
+	std::cout << std::endl;
+	for (size_t i = 1; i < stage_height + 1; i++)
+	{
+		gotoxy(0, i);
+		cout << "│";
+		gotoxy(stage_width + 1, i);
+		cout << "│";
+	}
+	gotoxy(0, stage_height + 1);
+	cout << "└";
+	for (int f = 0; f < stage_width; f++)
+	{
+		printf("─");
+	}
+	std::cout << std::endl;
+}
+
+
 //메인 게임
-void maingame(int stage_width, int stage_height, bool isOriginal,int *GameState,int *score) {
-	//게임 변수
+void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,int *score) {
+	
+	//지렁이
 	struct  WormBody {
 		int x;
 		int y;
 		char body;
 	};
 
+	//방향 키
 	char game_key = '0';
 	bool isC = true;
+
+	//스테이지 크기
 	int x = 20;
 	int y = 10;
+
+	//처음 지렁이 배열 크기
 	int len = 2;
+
+	//꼬리 였던 공간 위치
 	int lastX;
 	int lastY;
+
+	//아이템 위치
 	int ItemX;
 	int ItemY;
+
+	//게임오버 트리거
 	bool trigger = false;
+
+	//지렁이 배열 생성
 	struct WormBody arr[1000];
+
+	//처음 시작시 정지
 	bool start_pause = true;
+
+	//WASD 확인
 	char check_key;
+
+	//아이템 변수
 	bool isSpawn = false;
 	bool Spawncheck = false;
 
-	long time_end = clock();
-	long time = clock();
+	//시간
+	long time_end = GetTickCount64();
+	long time = GetTickCount64();
 
 
 	//처음 지렁이 초기화
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < len+1; i++)
 	{
 		arr[i].body = 'o';
 		arr[i].x = x;
@@ -47,13 +95,15 @@ void maingame(int stage_width, int stage_height, bool isOriginal,int *GameState,
 	gotoxy(ItemX, ItemY);
 	printf("@");
 
+	//UI
 	gotoxy(60, 10);
 	cout << "score : " << *score;
 	gotoxy(60, 11);
 	cout << "ESC를 눌러 메인메뉴로 나가기.";
 
+
 	while (*GameState < 6 && *GameState>1)
-	{
+	{	
 		//제거&이동
 		switch (game_key)
 		{
@@ -63,7 +113,8 @@ void maingame(int stage_width, int stage_height, bool isOriginal,int *GameState,
 			lastY = arr[len].y;
 			gotoxy(lastX, lastY);
 			cout << " ";
-
+			
+			
 			//위치 증감
 			for (int i = len; i > 0; i--)
 			{
@@ -127,7 +178,7 @@ void maingame(int stage_width, int stage_height, bool isOriginal,int *GameState,
 			break;
 		}
 
-		//이동
+		//이동(렌더)
 		for (size_t i = 0; i < len + 1; i++)
 		{
 			gotoxy(arr[i].x, arr[i].y);
@@ -156,25 +207,31 @@ void maingame(int stage_width, int stage_height, bool isOriginal,int *GameState,
 		}
 
 		//게임오버(스테이지)
-		if (isOriginal == true) {
-			if (arr[0].x == 0 || arr[0].y == 0 || arr[0].x == stage_width + 1 || arr[0].y == stage_height + 1) {
+		if (arr[0].x == 0 || arr[0].y == 0 || arr[0].x == stage_width + 1 || arr[0].y == stage_height + 1) {
+			if (Vercheck == '1') {
 				trigger = true;
 			}
+			else if (Vercheck == '2') {//벽 x모드
+				if (arr[0].x == 0) {
+					arr[0].x = stage_width+1;
+				}
+				else if (arr[0].y == 0) {
+					arr[0].y = stage_height+1;
+				}
+				else if (arr[0].x == stage_width + 1) {
+					arr[0].x = 1;
+				}
+				else if (arr[0].y == stage_height + 1) {
+					arr[0].y = 1;
+				}
+				//게임 테두리 찍기
+				//drawborder(stage_width, stage_height);
+			}
+
 		}
-		else if (isOriginal == false) {
-			if (arr[0].x == 0) {
-				arr[0].x = stage_width + 1;
-			}
-			else if (arr[0].y == 0) {
-				arr[0].y = stage_height + 1;
-			}
-			else if (arr[0].x == stage_width + 1) {
-				arr[0].x = 0;
-			}
-			else if (arr[0].y == stage_height + 1) {
-				arr[0].y = 0;
-			}
-		}
+		
+		//테두리 그리기
+		drawborder(stage_width, stage_height);
 
 		//게임오버
 		if (trigger == true) {
@@ -182,31 +239,6 @@ void maingame(int stage_width, int stage_height, bool isOriginal,int *GameState,
 			*GameState = 7;
 			break;
 		}
-
-		//게임 테두리 계속 찍기
-		gotoxy(0, 0);
-		std::cout << "┌";
-		for (int j = 0; j < stage_width; j++)
-		{
-			std::cout << "─";
-		}
-		std::cout << "┐";
-		std::cout << std::endl;
-		for (size_t i = 1; i < stage_height + 1; i++)
-		{
-			gotoxy(0, i);
-			cout << "│";
-			gotoxy(stage_width + 1, i);
-			cout << "│";
-		}
-		gotoxy(0, stage_height + 1);
-		cout << "└";
-		for (int f = 0; f < stage_width; f++)
-		{
-			printf("─");
-		}
-		std::cout << "┘";
-		std::cout << std::endl;
 
 		//방향 입력
 		if (_kbhit())
@@ -265,23 +297,48 @@ void maingame(int stage_width, int stage_height, bool isOriginal,int *GameState,
 			}
 
 			gotoxy(ItemX, ItemY);
-			printf("@");
+			cout << "@";
+
 		}
 
-		gotoxy(60, 12);
 
+		
 		//시간
+		time = GetTickCount64() - time_end;
+		time_end = GetTickCount64();
+
 		/*
-		time = clock() - time_end;
-		time_end = clock();
+		if (time <80) {
+			Sleep(80 - time);
+		}
+		*/	
+		Sleep(1000/21);
+		if (time != 0) {
+			gotoxy(60, 12);
+			cout << "fps : " << 1000 / time<<endl;
+		}
+		
+		
 
-
-
-		cout << "fps : " << 1000 / time;
-		*/
-
-		Sleep(120);
 	}
 	
 	system("cls");
 };
+
+
+void GameOver(int *score,int * highscore,int *GameState) {
+	system("cls");
+	gotoxy(5, 5);
+	cout << "	GAMEOVER" << endl;
+	cout << "	점수 : " << *score << endl;
+	if (*score > *highscore) {
+		*highscore = *score;
+	}
+	cout << "	최고점수 : " << *highscore;
+	gotoxy(0, 10);
+	cout << "아무키를 눌러 메인메뉴로 돌아가기.";
+	Sleep(500);
+	_getch();
+	*score = 0;
+	*GameState = 0;
+}

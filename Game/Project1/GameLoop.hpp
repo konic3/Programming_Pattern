@@ -23,58 +23,6 @@ namespace Running {
 		int stage_height=20;
 		char key_input = '0';
 		char Vercheck='1';
-		
-		
-
-		
-
-
-		//메인메뉴 
-		/*
-		void KeyEvent(char KeyInput)
-		{
-			system("cls");
-			switch (KeyInput)
-			{
-			case KEY_ESC:
-				isEsc = true;
-				gotoxy(5, 5);
-				cout << "종료하시겠습니까?\n\n" "     [ 예 ]   [아니오]" << endl;
-				break;
-			case '3':
-				isEsc = true;
-				gotoxy(5, 5);
-				cout << "종료하시겠습니까?\n\n" "     [ 예 ]   [아니오]" << endl;
-				break;
-			case KEY_LEFT:
-				if (isEsc == true) {
-					isOut = true;
-					gotoxy(5, 5);
-					cout << "종료하시겠습니까?\n\n" ANSI_COLOR_YELLOW"     [ 예 ]   " ANSI_COLOR_RESET"[아니오]" << endl;
-				}
-				break;
-			case KEY_RIGHT:
-				if (isEsc == true)
-				{
-					isOut = false;
-					gotoxy(5, 5);
-					cout << "종료하시겠습니까?\n\n" ANSI_COLOR_RESET"     [ 예 ]   " ANSI_COLOR_YELLOW"[아니오]" ANSI_COLOR_RESET"" << endl;
-				}
-				break;
-			case KEY_ENTER:
-				if (isOut == true) { isGameRunning = false; }
-				else {
-
-					system("cls"); isEsc = false; GameState = 0;
-				}
-				break;
-			default:
-				isGameRunning = true;
-				break;
-			}
-		}
-		*/
-
 
 		//게임 싸이클
 		void Run() {
@@ -91,28 +39,10 @@ namespace Running {
 				mainmenu();
 			}
 			else if (GameState == 5) {
-				if (Vercheck == '2') {
-					maingame(stage_width, stage_height, false, &GameState, &score);//일반모드
-				}
-				else {
-					maingame(stage_width, stage_height, true, &GameState, &score);//벽X모드
-				}
+				maingame(stage_width, stage_height, Vercheck, &GameState, &score);
 			}
 			else {
-				system("cls");
-				gotoxy(5, 5);
-				cout << "	GAMEOVER"<<endl;
-				cout << "	점수 : " << score<<endl;
-				if (score > highscore) {
-					highscore = score;
-				}
-				cout << "	최고점수 : " << highscore;
-				gotoxy(0, 10);
-				cout << "아무키를 눌러 메인메뉴로 돌아가기.";
-				Sleep(500);
-				_getch();
-				score = 0;
-				GameState = 0;
+				GameOver(&score, &highscore, &GameState);
 			}
 		}
 
@@ -144,7 +74,7 @@ namespace Running {
 			case 1:
 				system("cls");
 				cout << "\n게임 모드를 입력해주세요.(기본은 일반모드)" << endl;
-				cout << "\n1.일반 모드    2.벽X모드" << endl;
+				cout << "\n1.일반 모드    2.포탈모드" << endl;
 				Vercheck = _getch();		
 				print_game_screen(stage_width, stage_height);
 				GameState = 5;
