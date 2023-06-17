@@ -109,4 +109,19 @@ void ExitMenu(bool *isEsc,bool *isOut,bool *isGameRunning,int *GameState) {
 	}
 }
 
-
+void GameOver(int* score, int* highscore, int* GameState) {
+	system("cls");
+	gotoxy(5, 5);
+	cout << "	GAMEOVER" << endl;
+	cout << "	점수 : " << *score << endl;
+	if (*score > *highscore) {
+		*highscore = *score;
+	}
+	cout << "	최고점수 : " << *highscore;
+	gotoxy(0, 10);
+	cout << "아무키를 눌러 메인메뉴로 돌아가기.";
+	Sleep(500);
+	_getch();
+	*score = 0;
+	*GameState = 0;
+}

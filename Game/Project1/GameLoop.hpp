@@ -75,7 +75,10 @@ namespace Running {
 				system("cls");
 				cout << "\n게임 모드를 입력해주세요.(기본은 일반모드)" << endl;
 				cout << "\n1.일반 모드    2.포탈모드" << endl;
-				Vercheck = _getch();		
+				Vercheck = _getch();	
+				if(Vercheck!='2') {
+					Vercheck = '1';
+				}
 				print_game_screen(stage_width, stage_height);
 				GameState = 5;
 				break;
