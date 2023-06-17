@@ -1,6 +1,5 @@
 #include "Util.hpp"
 
-using namespace std;
 
 //테두리 그리기
 void drawborder(int stage_width, int stage_height) {
