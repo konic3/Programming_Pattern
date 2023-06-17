@@ -72,6 +72,8 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 	//아이템 위치
 	int ItemX;
 	int ItemY;
+	int PoisonX;
+	int PoisonY;
 
 	//게임오버 트리거
 	bool trigger = false;
@@ -109,13 +111,19 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 	ItemY = (rand() % stage_height) + 1;
 	gotoxy(ItemX, ItemY);
 	cout << ANSI_COLOR_RED"@" ANSI_COLOR_WHITE" ";
-	
+	if (Vercheck == '3') {
+		PoisonX = (rand() % stage_width) + 1;
+		PoisonY = (rand() % stage_width) + 1;
+		gotoxy(PoisonX, PoisonY);
+		cout << ANSI_COLOR_MAGENTA"@" ANSI_COLOR_WHITE" ";
+	}
+
 	//UI
 	gotoxy(60, 10);
 	cout << "score : " << *score;
 	gotoxy(60, 11);
 	cout << "ESC를 눌러 메인메뉴로 나가기.";
-
+	
 
 	while (*GameState < 6 && *GameState>1)
 	{	
@@ -223,7 +231,7 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 
 		//게임오버(스테이지)
 		if (arr[0].x == 0 || arr[0].y == 0 || arr[0].x == stage_width + 1 || arr[0].y == stage_height + 1) {
-			if (Vercheck == '1') {
+			if (Vercheck !='2') {
 				trigger = true;
 			}
 			else if (Vercheck == '2') {//벽 x모드
@@ -246,6 +254,13 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 
 		}
 		
+		//게임오버(독사과)
+		if (Vercheck == '3') {
+			if (arr[0].x == PoisonX && arr[0].y == PoisonY) {
+				trigger = true;
+			}
+		}
+
 		//게임오버
 		if (trigger == true) {
 			system("cls");
@@ -285,6 +300,11 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 		//아이템 생성
 		if (arr[0].x == ItemX && arr[0].y == ItemY) {
 			*score+=1;
+			if (Vercheck == '3') {
+
+				gotoxy(PoisonX, PoisonY);
+				cout << " ";
+			}
 			gotoxy(60, 10);
 			cout << "score : " << *score;
 			len++;
@@ -296,6 +316,9 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 			{
 				ItemX = (rand() % stage_width) + 1;
 				ItemY = (rand() % stage_height) + 1;
+				PoisonX = (rand() % stage_width) + 1;
+				PoisonY = (rand() % stage_height) + 1;
+
 				for (int i = 0; i < len; i++)
 				{
 					if (ItemX == arr[i].x && ItemY == arr[i].y) {
@@ -306,12 +329,28 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 						isSpawn = true;
 					}
 				}
+				if (Vercheck == '3') {		
+					for (int i = 0; i < len; i++)
+					{
+						if (PoisonX == arr[i].x && PoisonY == arr[i].y&&PoisonX==ItemX&&PoisonY==ItemY) {
+							isSpawn = false;
+							break;
+						}
+						else {
+							isSpawn = true;
+						}
+					}
+				}
 				if (isSpawn == true) {
 					Spawncheck = true;
 				}
 			}
 			gotoxy(ItemX, ItemY);
 			cout << ANSI_COLOR_RED"@" ANSI_COLOR_WHITE" ";
+			if (Vercheck == '3') {
+				gotoxy(PoisonX, PoisonY);
+				cout << ANSI_COLOR_MAGENTA"@" ANSI_COLOR_WHITE" ";
+			}
 		}
 
 		//시간

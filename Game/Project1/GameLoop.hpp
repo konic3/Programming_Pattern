@@ -1,6 +1,5 @@
 #pragma once 
 #include "MainMenu.hpp"
-//#include "Util.hpp"
 #include "MainGame.hpp"
 
 namespace Running {
@@ -38,8 +37,6 @@ namespace Running {
 			}
 		}
 
-		
-
 		//메인메뉴 전환
 		void mainmenu() {
 			switch (GameState)
@@ -66,9 +63,9 @@ namespace Running {
 			case 1:
 				system("cls");
 				cout << "\n게임 모드를 입력해주세요.(기본은 일반모드)" << endl;
-				cout << "\n1.일반 모드    2.포탈모드" << endl;
+				cout << "\n1.일반 모드    2.포탈 모드    3.독사과모드" << endl;
 				Vercheck = _getch();	
-				if(Vercheck!='2') {
+				if(Vercheck!='2'&&Vercheck!='3') {
 					Vercheck = '1';
 				}
 				print_game_screen(stage_width, stage_height);
@@ -98,11 +95,6 @@ namespace Running {
 			default:
 				break;
 			}
-		}
-
-
-
-
-		
+		}	
 	};
 }
