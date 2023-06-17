@@ -268,8 +268,10 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 			break;
 		}
 
-		//테두리 그리기
-		drawborder(stage_width, stage_height);
+		if (Vercheck == '2') {
+			//테두리 그리기
+			drawborder(stage_width, stage_height);
+		}
 
 		//방향 입력
 		if (_kbhit())

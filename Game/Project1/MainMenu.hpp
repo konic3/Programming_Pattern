@@ -27,7 +27,7 @@ void print_game_screen(int stage_width, int stage_height)
 	system("cls");
 
 
-	//입력받은 stage_width만큼 출력
+	//stage_width만큼 출력
 	cout << "┌";
 	for (int j = 0; j < stage_width; j++)
 	{
@@ -36,7 +36,7 @@ void print_game_screen(int stage_width, int stage_height)
 	cout << "┐";
 	cout << endl;
 
-	//입력받은 stage_height만큼 *출력
+	//stage_height만큼 *출력
 	for (int u = 0; u < stage_height; u++)
 	{
 		cout << "│";
@@ -47,7 +47,7 @@ void print_game_screen(int stage_width, int stage_height)
 		cout << "│" << endl;
 	}
 
-	//입력받은 stage_width만큼 출력
+	//stage_width만큼 출력
 	cout << "└";
 	for (int f = 0; f < stage_width ; f++)
 	{
