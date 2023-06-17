@@ -211,18 +211,19 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 				trigger = true;
 			}
 			else if (Vercheck == '2') {//벽 x모드
-				if (arr[0].x == 0) {
+				if (arr[0].x == stage_width + 1) {
+					arr[0].x = 0;
+				}
+				else if (arr[0].y == stage_height + 1) {
+					arr[0].y = 0;
+				}
+				else if (arr[0].x == 0) {
 					arr[0].x = stage_width+1;
 				}
 				else if (arr[0].y == 0) {
 					arr[0].y = stage_height+1;
 				}
-				else if (arr[0].x == stage_width + 1) {
-					arr[0].x = 1;
-				}
-				else if (arr[0].y == stage_height + 1) {
-					arr[0].y = 1;
-				}
+				
 				//게임 테두리 찍기
 				//drawborder(stage_width, stage_height);
 			}
