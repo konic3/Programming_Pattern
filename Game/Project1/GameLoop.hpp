@@ -16,6 +16,7 @@ namespace Running {
 		char Vercheck='1';
 		int score = 0;
 		int highscore = 0;
+
 		//∞‘¿” ΩŒ¿Ã≈¨
 		void Run() {
 			while (isGameRunning == true)
