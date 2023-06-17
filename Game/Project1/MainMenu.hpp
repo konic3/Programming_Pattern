@@ -11,7 +11,7 @@ void print_title_screen()
 	cout << "│               왕꿈틀이                │" << endl;
 	cout << "│             (Snake  Bite)             │" << endl;
 	cout << "│                                       │" << endl;
-	cout << "│	      1. 게임 시작              │" << endl;
+	cout << "│             1. 게임 시작              │" << endl;
 	cout << "│             2. 게임 설명              │" << endl;
 	cout << "│             3. 게임 종료              │" << endl;
 	cout << "│                                       │" << endl;
