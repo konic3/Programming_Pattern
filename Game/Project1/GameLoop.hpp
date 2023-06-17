@@ -25,7 +25,6 @@ namespace Running {
 			}
 		}
 
-
 		void Update() {
 			if (GameState < 6&&GameState!=5)
 			{
