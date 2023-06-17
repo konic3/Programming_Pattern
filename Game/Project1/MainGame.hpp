@@ -113,7 +113,7 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 	cout << ANSI_COLOR_RED"@" ANSI_COLOR_WHITE" ";
 	if (Vercheck == '3') {
 		PoisonX = (rand() % stage_width) + 1;
-		PoisonY = (rand() % stage_width) + 1;
+		PoisonY = (rand() % stage_height) + 1;
 		gotoxy(PoisonX, PoisonY);
 		cout << ANSI_COLOR_MAGENTA"@" ANSI_COLOR_WHITE" ";
 	}
