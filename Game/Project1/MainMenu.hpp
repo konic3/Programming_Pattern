@@ -120,7 +120,7 @@ void GameOver(int* score, int* highscore, int* GameState) {
 	cout << "	최고점수 : " << *highscore;
 	gotoxy(0, 10);
 	cout << "아무키를 눌러 메인메뉴로 돌아가기.";
-	Sleep(500);
+	Sleep(1000);
 	_getch();
 	*score = 0;
 	*GameState = 0;

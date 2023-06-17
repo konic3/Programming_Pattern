@@ -27,6 +27,22 @@ void drawborder(int stage_width, int stage_height) {
 	std::cout << std::endl;
 }
 
+void CheckTime(long *time,long *time_end) {
+	*time = GetTickCount64() - *time_end;
+	*time_end = GetTickCount64();
+	/*
+	if (time <80) {
+		Sleep(80 - time);
+	}
+	*/
+	
+	Sleep(1000 / 21);
+	if (time != 0) {
+		gotoxy(60, 12);
+		cout << "fps : " << 1000 / *time << endl;
+	}
+}
+
 
 //메인 게임
 void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,int *score) {
@@ -92,8 +108,8 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 	ItemX = (rand() % stage_width) + 1;
 	ItemY = (rand() % stage_height) + 1;
 	gotoxy(ItemX, ItemY);
-	printf("@");
-
+	cout << ANSI_COLOR_RED"@" ANSI_COLOR_WHITE" ";
+	gotoxy(60, 23);
 	//UI
 	gotoxy(60, 10);
 	cout << "score : " << *score;
@@ -230,15 +246,15 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 
 		}
 		
-		//테두리 그리기
-		drawborder(stage_width, stage_height);
-
 		//게임오버
 		if (trigger == true) {
 			system("cls");
 			*GameState = 7;
 			break;
 		}
+
+		//테두리 그리기
+		drawborder(stage_width, stage_height);
 
 		//방향 입력
 		if (_kbhit())
@@ -276,7 +292,6 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 			arr[len].y = arr[len - 1].y;
 			arr[len].body = 'o';
 			Spawncheck = false;
-
 			while (Spawncheck == false)
 			{
 				ItemX = (rand() % stage_width) + 1;
@@ -295,31 +310,12 @@ void maingame(int stage_width, int stage_height, char Vercheck,int *GameState,in
 					Spawncheck = true;
 				}
 			}
-
 			gotoxy(ItemX, ItemY);
-			cout << "@";
-
+			cout << ANSI_COLOR_RED"@" ANSI_COLOR_WHITE" ";
 		}
 
-
-		
 		//시간
-		time = GetTickCount64() - time_end;
-		time_end = GetTickCount64();
-
-		/*
-		if (time <80) {
-			Sleep(80 - time);
-		}
-		*/	
-		Sleep(1000/21);
-		if (time != 0) {
-			gotoxy(60, 12);
-			cout << "fps : " << 1000 / time<<endl;
-		}
-		
-		
-
+		CheckTime(&time, &time_end);
 	}
 	
 	system("cls");
