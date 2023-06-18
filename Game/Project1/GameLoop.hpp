@@ -10,7 +10,7 @@ namespace Running {
 		bool isGameRunning = true;
 		bool isEsc = false;
 		bool isOut = false;
-		int stage_width=50;
+		int stage_width=40;
 		int stage_height=20;
 		char key_input = '0';
 		char Vercheck='1';
